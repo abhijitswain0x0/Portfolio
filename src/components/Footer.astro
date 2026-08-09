@@ -1,31 +1,15 @@
 ---
+
 ---
 
-<footer class="footer reveal" role="contentinfo">
-  <div class="container footer-grid">
-    <div class="footer-left">SYSTEM STATUS: OPERATIONAL</div>
-    <div class="footer-center">UPTIME <span id="uptime-counter" class="uptime-counter">00:00</span></div>
-    <div class="footer-right">&copy; <span id="current-year"></span> ABHIJIT</div>
-  </div>
-</footer>
+<div class="footer">
+  &copy; <span id="current-year"></span> Abhijit Swain
+</div>
 
 <script is:inline>
-  // Live uptime counter
-  const uptimeEl = document.getElementById('uptime-counter');
-  let seconds = 0;
-
-  const updateUptime = () => {
-    const mins = Math.floor(seconds / 60).toString().padStart(2, '0');
-    const secs = (seconds % 60).toString().padStart(2, '0');
-    uptimeEl.textContent = `${mins}:${secs}`;
-    seconds++;
-  };
-
-  updateUptime();
-  setInterval(updateUptime, 1000);
-
   // Auto copyright year
-  document.getElementById('current-year').textContent = new Date().getFullYear();
+  document.getElementById("current-year").textContent =
+    new Date().getFullYear();
 </script>
 
 <style>
@@ -33,32 +17,8 @@
     border-top: 1px solid var(--color-border-strong);
     padding: 2rem 0;
     margin-top: var(--section-spacing);
-  }
-
-  .footer-grid {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 1rem;
-  }
-
-  .footer-left,
-  .footer-center,
-  .footer-right {
     font-family: var(--font-body);
     font-size: 0.9em;
-  }
-
-  .uptime-counter {
-    font-family: var(--font-body);
-    font-variant-numeric: tabular-nums;
-  }
-
-  @media (max-width: 520px) {
-    .footer-grid {
-      flex-direction: column;
-      text-align: center;
-    }
+    text-align: center;
   }
 </style>
