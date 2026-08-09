@@ -1,0 +1,42 @@
+---
+const skills = [
+  "TypeScript",
+  "React",
+  "Node.js",
+  "Git",
+  "System Design",
+  "Terminal Tooling",
+  "UI/UX",
+];
+---
+
+<section id="skills" class="panel reveal container">
+  <div class="panel-header">
+    <div class="panel-dots">
+      <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+    </div>
+    <div class="panel-label">skills.json</div>
+  </div>
+  <div class="panel-content skills-grid">
+    {
+      skills.map((skill) => (
+        <span class="skill-chip">{skill}</span>
+      ))
+    }
+  </div>
+</section>
+
+<style>
+  .skills-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+  }
+
+  .skill-chip {
+    border: 1px solid var(--color-border);
+    padding: 0.5rem 1rem;
+    font-family: var(--font-body);
+    font-size: 0.9em;
+  }
+</style>

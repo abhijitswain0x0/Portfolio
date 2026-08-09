@@ -1,0 +1,42 @@
+---
+import ProjectCard from './ProjectCard.astro';
+---
+
+<section id="projects" class="panel reveal container">
+  <div class="panel-header">
+    <div class="panel-dots">
+      <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+    </div>
+    <div class="panel-label">projects/</div>
+  </div>
+  <div class="panel-content projects-grid">
+    <ProjectCard
+      title="GitPal"
+      description="A visual Git wrapper that turns branches, commits and merges into something a first-time developer can actually read — with real-time collaboration built in."
+      tags={["React", "Real-time sync", "Git internals"]}
+      codeLink="https://github.com/abhijitswain0x0"
+      demoLink="#"
+    />
+    <ProjectCard
+      title="Blink"
+      roleLabel="Design contribution"
+      description="Brand identity and interaction design for a JARVIS-style personal assistant — icon system, color language and the interface's overall feel."
+      tags={["Brand design", "SVG", "Interaction design"]}
+      codeLink="https://github.com/abhijitswain0x0"
+    />
+  </div>
+</section>
+
+<style>
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+  }
+
+  @media (max-width: 640px) {
+    .projects-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

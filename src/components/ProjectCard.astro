@@ -1,0 +1,168 @@
+---
+export interface ProjectCardProps {
+  title: string;
+  description: string;
+  tags: string[];
+  codeLink?: string;
+  demoLink?: string;
+  roleLabel?: string;
+  isEmpty?: boolean;
+}
+
+const { title, description, tags, codeLink, demoLink, roleLabel, isEmpty = false } = Astro.props;
+
+// Pixel glyph for empty slot card (as template literal)
+const emptySlotIcon = `
+<svg width="49" height="49" viewBox="0 0 7 7" fill="currentColor" class="empty-slot-icon">
+  <rect x="3" y="0" width="1" height="1"></rect>
+  <rect x="1" y="1" width="1" height="1"></rect>
+  <rect x="5" y="1" width="1" height="1"></rect>
+  <rect x="0" y="2" width="1" height="1"></rect>
+  <rect x="6" y="2" width="1" height="1"></rect>
+  <rect x="1" y="5" width="1" height="1"></rect>
+  <rect x="2" y="6" width="1" height="1"></rect>
+  <rect x="3" y="5" width="1" height="1"></rect>
+  <rect x="4" y="6" width="1" height="1"></rect>
+  <rect x="5" y="5" width="1" height="1"></rect>
+</svg>
+`;
+---
+
+<div class={`project-card ${isEmpty ? 'empty' : ''}`}>
+  {isEmpty ? (
+    <>
+      <div class="empty-slot-icon" set:html={emptySlotIcon} />
+      <p class="empty-text">{description}</p>
+      <button class="button ghost">+ ADD PROJECT</button>
+    </>
+  ) : (
+    <>
+      {roleLabel && <span class="role-label">{roleLabel}</span>}
+      <h3 class="project-title">{title}</h3>
+      <p class="project-description">{description}</p>
+      <div class="project-tags">
+        {tags.map((tag) => (
+          <span class="tag-chip">{tag}</span>
+        ))}
+      </div>
+      <div class="project-links">
+        {codeLink && (
+          <a href={codeLink} target="_blank" rel="noopener noreferrer" class="project-link">
+            Code
+            <svg class="link-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+          </a>
+        )}
+        {demoLink && (
+          <a href={demoLink} target="_blank" rel="noopener noreferrer" class="project-link">
+            Demo
+            <svg class="link-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+          </a>
+        )}
+      </div>
+    </>
+  )}
+</div>
+
+<style>
+  .project-card {
+    border: 1px solid var(--color-border-strong);
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    font-family: var(--font-body);
+    transition: background-color 0.2s, color 0.2s;
+  }
+
+  .project-card.empty {
+    border-style: dashed;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+  }
+
+  .project-card:not(.empty):hover {
+    background-color: var(--color-fg);
+    color: var(--color-bg);
+  }
+
+  .project-card.empty .empty-slot-icon {
+    width: 49px;
+    height: 49px;
+    margin-bottom: 1rem;
+  }
+
+  .project-card.empty .empty-text {
+    color: var(--color-muted);
+    margin-bottom: 1.5rem;
+  }
+
+  .project-card.empty .button.ghost {
+    border: 1px solid var(--color-border-strong);
+    padding: 0.75rem 1.5rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    background: none;
+    color: var(--color-muted);
+    cursor: default;
+  }
+
+  .role-label {
+    font-size: 0.8em;
+    color: var(--color-muted);
+    margin-bottom: 0.5rem;
+    display: block;
+  }
+
+  .project-title {
+    font-size: 1.5em;
+    margin-bottom: 0.75rem;
+    line-height: 1.2;
+  }
+
+  .project-description {
+    font-size: 1em;
+    color: var(--color-muted);
+    margin-bottom: 1.5rem;
+    flex-grow: 1;
+  }
+
+  .project-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 1rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .tag-chip {
+    border: 1px solid var(--color-border);
+    padding: 0.3rem 0.6rem;
+    font-size: 0.8em;
+  }
+
+  .project-links {
+    display: flex;
+    gap: 1.5rem;
+    margin-top: auto; /* Push links to bottom */
+  }
+
+  .project-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-weight: 500;
+    font-size: 0.9em;
+    transition: background-color 0.2s, color 0.2s;
+  }
+
+  .project-link .link-icon {
+    width: 1em;
+    height: 1em;
+  }
+
+  .project-card:not(.empty):hover .project-link {
+    background-color: var(--color-bg);
+    color: var(--color-fg);
+    padding: 0.25rem 0.5rem;
+  }
+</style>
