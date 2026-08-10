@@ -1,31 +1,35 @@
 ---
+
 ---
 
 <div id="boot-overlay" class="boot-overlay">
-  <pre class="boot-terminal"><span id="boot-output"></span><span class="boot-cursor">_</span></pre>
+  <pre
+    class="boot-terminal"><span id="boot-output" /><span class="boot-cursor">_</span></pre>
   <button id="skip-boot" class="skip-button">skip &gt;&gt;</button>
 </div>
 
 <script is:inline>
-  document.addEventListener('DOMContentLoaded', () => {
-    const bootOverlay = document.getElementById('boot-overlay');
-    const bootOutput = document.getElementById('boot-output');
-    const skipButton = document.getElementById('skip-boot');
+  document.addEventListener("DOMContentLoaded", () => {
+    const bootOverlay = document.getElementById("boot-overlay");
+    const bootOutput = document.getElementById("boot-output");
+    const skipButton = document.getElementById("skip-boot");
 
     const messages = [
-      '> initializing kernel...',
-      '> mounting /projects',
-      '> mounting /about',
-      '> loading fonts [JetBrains Mono, VT323]',
-      '> starting session as ABHIJIT',
-      '> ready.',
+      "> [OK] Establishing connection to host",
+      "> [OK] Collecting Assets",
+      "> [INFO] Astro framework detected",
+      "> [OK] Building DOM",
+      "> [INFO] Authorised as visitor",
+      "> Booting...",
     ];
 
     let messageIndex = 0;
     let charIndex = 0;
     const typingSpeed = 220; // milliseconds per message
 
-    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const prefersReducedMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)",
+    ).matches;
 
     const typeMessage = () => {
       if (messageIndex < messages.length) {
@@ -34,29 +38,37 @@
           charIndex++;
           setTimeout(typeMessage, 10);
         } else {
-          bootOutput.textContent += '\n'; // Newline after each message
+          bootOutput.textContent += "\n"; // Newline after each message
           messageIndex++;
           charIndex = 0;
           setTimeout(typeMessage, typingSpeed);
         }
       } else {
         // All messages typed, fade out overlay
-        bootOverlay.style.opacity = '0';
-        bootOverlay.addEventListener('transitionend', () => {
-          bootOverlay.style.display = 'none';
-        }, { once: true });
+        bootOverlay.style.opacity = "0";
+        bootOverlay.addEventListener(
+          "transitionend",
+          () => {
+            bootOverlay.style.display = "none";
+          },
+          { once: true },
+        );
       }
     };
 
     const skipAnimation = () => {
-      bootOutput.textContent = messages.join('\n') + '\n';
-      bootOverlay.style.opacity = '0';
-      bootOverlay.addEventListener('transitionend', () => {
-        bootOverlay.style.display = 'none';
-      }, { once: true });
+      bootOutput.textContent = messages.join("\n") + "\n";
+      bootOverlay.style.opacity = "0";
+      bootOverlay.addEventListener(
+        "transitionend",
+        () => {
+          bootOverlay.style.display = "none";
+        },
+        { once: true },
+      );
     };
 
-    skipButton.addEventListener('click', skipAnimation);
+    skipButton.addEventListener("click", skipAnimation);
 
     if (prefersReducedMotion) {
       skipAnimation();
@@ -98,7 +110,9 @@
   }
 
   @keyframes blink {
-    50% { opacity: 0; }
+    50% {
+      opacity: 0;
+    }
   }
 
   .skip-button {
@@ -112,7 +126,9 @@
     font-size: 0.9em;
     color: var(--color-fg);
     cursor: pointer;
-    transition: background-color 0.2s, color 0.2s;
+    transition:
+      background-color 0.2s,
+      color 0.2s;
   }
 
   .skip-button:hover {
