@@ -80,7 +80,8 @@ const emptySlotIcon = `
     justify-content: center;
   }
 
-  .project-card:not(.empty):hover {
+  .project-card:not(.empty):hover,
+  .project-card:not(.empty):active {
     background-color: var(--color-fg);
     color: var(--color-bg);
   }
@@ -160,7 +161,8 @@ const emptySlotIcon = `
     height: 1em;
   }
 
-  .project-card:not(.empty):hover .project-link {
+  .project-card:not(.empty):hover .project-link,
+  .project-card:not(.empty):active .project-link {
     background-color: var(--color-bg);
     color: var(--color-fg);
     padding: 0.25rem 0.5rem;

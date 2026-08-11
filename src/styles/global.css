@@ -67,6 +67,12 @@ button {
   padding: 0;
 }
 
+a,
+button {
+  touch-action: manipulation; /* Remove double-tap zoom delay on mobile */
+  -webkit-tap-highlight-color: transparent;
+}
+
 /* Focus outline */
 :focus-visible {
   outline: 1px dashed var(--color-fg);
